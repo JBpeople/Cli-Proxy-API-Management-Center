@@ -1,53 +1,55 @@
-# CLIProxyAPI Management Center (JBpeople fork)
+# CLIProxyAPI 管理面板（JBpeople fork）
 
-This is the frontend companion fork for the JBpeople CLIProxyAPI fork.
+这是 JBpeople 版 CLIProxyAPI 的配套前端面板 fork。
 
-It is focused on making OpenAI-compatible provider management more practical.
+这个前端 fork 主要围绕 **OpenAI-compatible 提供商管理** 做增强，让模型自动发现这套流程更顺手。
 
-## What this fork changes
+## 这个 fork 做了什么
 
-- adds a dedicated **Model Sync** page
-- adds a **Run now** action for manual sync
-- adds **Auto discover models** toggle to the OpenAI-compatible provider editor
-- uses a more Chinese-friendly management workflow/UI for the added features
+- 新增独立的 **模型同步** 页面
+- 支持 **立即同步** 按钮
+- 在 OpenAI-compatible 提供商编辑页新增 **自动发现模型** 开关
+- 新增功能相关 UI 统一改成更适合中文使用的表达
 
-## Intended workflow
-
-This frontend is designed to work together with:
+## 这个前端配套的后端仓库
 
 - https://github.com/JBpeople/CLIProxyAPI
 
-The backend fork provides:
+对应的后端 fork 提供：
 
-- automatic model discovery from `/v1/models`
-- model sync status API
-- dynamic auth registration for discovered compatibility models
+- 从 `/v1/models` 自动发现模型
+- 模型同步状态接口
+- 让自动发现的模型参与 auth 注册与调用链路
 
-## Added backend endpoints expected by this frontend
+## 本前端依赖的新增后端接口
 
 ```text
 GET  /v0/management/model-sync/status
 POST /v0/management/model-sync/run
 ```
 
-## Build
+## 构建
 
 ```bash
 npm install
 npm run build
 ```
 
-The build output is:
+构建产物：
 
 - `dist/index.html`
 
-You can rename/copy it as `management.html` when deploying into a CLIProxyAPI static directory.
+部署时可以把它复制/改名为：
 
-## Notes
+- `management.html`
 
-This fork is meant to be used with the matching backend fork.
-Using it with upstream backend may cause some added UI features to show but not work fully.
+然后放进 CLIProxyAPI 的静态目录里。
 
-## License
+## 说明
+
+这个前端 fork 最好和配套后端 fork 一起使用。
+如果直接搭配 upstream 原版后端，新增 UI 可能能显示，但功能不一定完整可用。
+
+## 许可证
 
 MIT
