@@ -14,7 +14,7 @@ const formatTime = (value?: string) => {
 };
 
 export function ModelSyncPage() {
-  const { t } = useTranslation();
+  useTranslation();
   const { showNotification } = useNotificationStore();
   const [items, setItems] = useState<ModelSyncStatusItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,7 @@ export function ModelSyncPage() {
     setTriggering(true);
     try {
       const res = await modelSyncApi.run();
-      showNotification(res?.message || t('model_sync.triggered', { defaultValue: 'Model sync triggered' }), 'success');
+      showNotification(res?.message || '模型同步已触发', 'success');
       await load();
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err || 'Unknown error');
@@ -58,30 +58,27 @@ export function ModelSyncPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.pageTitle}>{t('model_sync.title', { defaultValue: 'Model Sync' })}</h1>
+      <h1 className={styles.pageTitle}>{'模型同步'}</h1>
       <Card
-        title={t('model_sync.title', { defaultValue: 'Model Sync' })}
+        title={'模型同步'}
         extra={
           <div className={styles.actions}>
             <Button variant="secondary" size="sm" onClick={() => void load()} loading={loading}>
-              {t('common.refresh', { defaultValue: 'Refresh' })}
+              {'刷新'}
             </Button>
             <Button size="sm" onClick={() => void handleRun()} loading={triggering}>
-              {t('model_sync.run_now', { defaultValue: 'Run now' })}
+              {'立即同步'}
             </Button>
           </div>
         }
       >
         <p className={styles.description}>
-          {t('model_sync.description', {
-            defaultValue:
-              'View upstream model discovery status and manually trigger a sync.',
-          })}
+          {'查看上游模型发现状态，并手动触发同步。'}
         </p>
         {error ? <div className="error-box">{error}</div> : null}
         {!loading && items.length === 0 ? (
           <div className="hint">
-            {t('model_sync.empty', { defaultValue: 'No model sync sources found.' })}
+            {'未找到模型同步源。'}
           </div>
         ) : (
           <div className={styles.list}>
@@ -91,21 +88,21 @@ export function ModelSyncPage() {
                   <div className={styles.itemTitle}>{item.source_id}</div>
                   <span className={`status-badge ${item.last_error ? 'error' : 'success'}`}>
                     {item.last_error
-                      ? t('model_sync.status_error', { defaultValue: 'Error' })
-                      : t('model_sync.status_ok', { defaultValue: 'OK' })}
+                      ? '异常'
+                      : '正常'}
                   </span>
                 </div>
                 <div className={styles.meta}>
                   <div>
-                    <span className={styles.label}>{t('model_sync.model_count', { defaultValue: 'Model count' })}:</span>
+                    <span className={styles.label}>{'模型数量'}:</span>
                     <span>{item.model_count ?? 0}</span>
                   </div>
                   <div>
-                    <span className={styles.label}>{t('model_sync.last_attempt', { defaultValue: 'Last attempt' })}:</span>
+                    <span className={styles.label}>{'最近尝试'}:</span>
                     <span>{formatTime(item.last_attempt_at)}</span>
                   </div>
                   <div>
-                    <span className={styles.label}>{t('model_sync.last_success', { defaultValue: 'Last success' })}:</span>
+                    <span className={styles.label}>{'最近成功'}:</span>
                     <span>{formatTime(item.last_success_at)}</span>
                   </div>
                 </div>

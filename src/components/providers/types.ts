@@ -16,6 +16,7 @@ export interface OpenAIFormState {
   testModel?: string;
   modelEntries: ModelEntry[];
   apiKeyEntries: ApiKeyEntry[];
+  autoDiscoverModels: boolean;
 }
 
 export interface AmpcodeUpstreamApiKeyEntry {

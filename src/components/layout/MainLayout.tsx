@@ -431,7 +431,7 @@ export function MainLayout() {
       ? [{ path: '/logs', label: t('nav.logs'), icon: sidebarIcons.logs }]
       : []),
     { path: '/system', label: t('nav.system_info'), icon: sidebarIcons.system },
-    { path: '/model-sync', label: t('model_sync.title', { defaultValue: 'Model Sync' }), icon: sidebarIcons.modelSync },
+    { path: '/model-sync', label: '模型同步', icon: sidebarIcons.modelSync },
   ];
   const navOrder = navItems.map((item) => item.path);
   const getRouteOrder = (pathname: string) => {

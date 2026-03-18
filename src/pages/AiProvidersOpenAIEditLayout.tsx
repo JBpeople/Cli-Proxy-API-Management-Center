@@ -49,6 +49,7 @@ const buildEmptyForm = (): OpenAIFormState => ({
   apiKeyEntries: [buildApiKeyEntry()],
   modelEntries: [{ name: '', alias: '' }],
   testModel: undefined,
+  autoDiscoverModels: false,
 });
 
 const parseIndexParam = (value: string | undefined) => {
@@ -114,6 +115,7 @@ const buildOpenAISignature = (form: OpenAIFormState, testModel: string) =>
     apiKeyEntries: normalizeApiKeyEntries(form.apiKeyEntries),
     models: normalizeModelEntries(form.modelEntries),
     testModel: String(testModel ?? '').trim(),
+    autoDiscoverModels: Boolean(form.autoDiscoverModels),
   });
 
 export function AiProvidersOpenAIEditLayout() {
@@ -279,6 +281,7 @@ export function AiProvidersOpenAIEditLayout() {
         apiKeyEntries: initialData.apiKeyEntries?.length
           ? initialData.apiKeyEntries
           : [buildApiKeyEntry()],
+        autoDiscoverModels: Boolean(initialData.autoDiscoverModels),
       };
 
       const available = modelEntries.map((entry) => entry.name.trim()).filter(Boolean);
@@ -411,6 +414,7 @@ export function AiProvidersOpenAIEditLayout() {
           proxyUrl: entry.proxyUrl?.trim() || undefined,
           headers: entry.headers,
         })),
+        autoDiscoverModels: Boolean(form.autoDiscoverModels),
       };
       if (form.priority !== undefined && Number.isFinite(form.priority)) {
         payload.priority = Math.trunc(form.priority);

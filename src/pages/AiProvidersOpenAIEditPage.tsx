@@ -7,6 +7,7 @@ import { HeaderInputList } from '@/components/ui/HeaderInputList';
 import { Input } from '@/components/ui/Input';
 import { ModelInputList } from '@/components/ui/ModelInputList';
 import { Select } from '@/components/ui/Select';
+import { ToggleSwitch } from '@/components/ui/ToggleSwitch';
 import { SecondaryScreenShell } from '@/components/common/SecondaryScreenShell';
 import { useEdgeSwipeBack } from '@/hooks/useEdgeSwipeBack';
 import { useNotificationStore } from '@/stores';
@@ -568,6 +569,19 @@ export function AiProvidersOpenAIEditPage() {
               onChange={(e) => setForm((prev) => ({ ...prev, baseUrl: e.target.value }))}
               disabled={saving || disableControls || isTestingKeys}
             />
+
+            <div className={styles.keyEntriesHeader}>
+              <div>
+                <label className={styles.keyEntriesTitle}>自动发现模型</label>
+                <div className={styles.keyEntriesHint}>保存后会定期从该提供商的 /v1/models 拉取模型列表，并合并全部 API Key 的结果。</div>
+              </div>
+              <ToggleSwitch
+                checked={Boolean(form.autoDiscoverModels)}
+                onChange={(value) => setForm((prev) => ({ ...prev, autoDiscoverModels: value }))}
+                disabled={saving || disableControls || isTestingKeys}
+                ariaLabel="自动发现模型"
+              />
+            </div>
 
             <HeaderInputList
               entries={form.headers}

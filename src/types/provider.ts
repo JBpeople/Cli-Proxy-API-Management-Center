@@ -55,5 +55,6 @@ export interface OpenAIProviderConfig {
   models?: ModelAlias[];
   priority?: number;
   testModel?: string;
+  autoDiscoverModels?: boolean;
   [key: string]: unknown;
 }
