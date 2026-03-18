@@ -6,6 +6,8 @@
 
 ## 这个 fork 做了什么
 
+![模型同步页面](./assets/model-sync-page.jpg)
+
 - 新增独立的 **模型同步** 页面
 - 支持 **立即同步** 按钮
 - 在 OpenAI-compatible 提供商编辑页新增 **自动发现模型** 开关
