@@ -1,12 +1,12 @@
 # CLIProxyAPI 管理面板（JBpeople fork）
 
+![模型同步页面](./assets/model-sync-page.jpg)
+
 这是 JBpeople 版 CLIProxyAPI 的配套前端面板 fork。
 
 这个前端 fork 主要围绕 **OpenAI-compatible 提供商管理** 做增强，让模型自动发现这套流程更顺手。
 
 ## 这个 fork 做了什么
-
-![模型同步页面](./assets/model-sync-page.jpg)
 
 - 新增独立的 **模型同步** 页面
 - 支持 **立即同步** 按钮
