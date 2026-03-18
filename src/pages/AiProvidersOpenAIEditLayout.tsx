@@ -134,6 +134,8 @@ export function AiProvidersOpenAIEditLayout() {
 
   const config = useConfigStore((state) => state.config);
   const fetchConfig = useConfigStore((state) => state.fetchConfig);
+  const updateConfigValue = useConfigStore((state) => state.updateConfigValue);
+  const clearCache = useConfigStore((state) => state.clearCache);
   const isCacheValid = useConfigStore((state) => state.isCacheValid);
 
   const [providers, setProviders] = useState<OpenAIProviderConfig[]>(
@@ -442,6 +444,8 @@ export function AiProvidersOpenAIEditLayout() {
       }
 
       setProviders(syncedProviders);
+      updateConfigValue('openai-compatibility', syncedProviders);
+      clearCache('openai-compatibility');
       showNotification(
         editIndex !== null
           ? t('notification.openai_provider_updated')
@@ -460,10 +464,12 @@ export function AiProvidersOpenAIEditLayout() {
     allowNextNavigation,
     draftKey,
     editIndex,
+    clearCache,
     fetchConfig,
     form,
     handleBack,
     providers,
+    updateConfigValue,
     setDraftBaselineSignature,
     showNotification,
     t,
