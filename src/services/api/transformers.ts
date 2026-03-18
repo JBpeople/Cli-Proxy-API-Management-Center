@@ -228,11 +228,13 @@ const normalizeOpenAIProvider = (provider: unknown): OpenAIProviderConfig | null
   const models = normalizeModelAliases(provider.models);
   const priority = provider.priority ?? provider['priority'];
   const testModel = provider['test-model'] ?? provider.testModel;
+  const autoDiscoverModels = provider['auto-discover-models'] ?? provider.autoDiscoverModels;
 
   const result: OpenAIProviderConfig = {
     name: String(name),
     baseUrl: String(baseUrl),
-    apiKeyEntries
+    apiKeyEntries,
+    autoDiscoverModels: Boolean(autoDiscoverModels)
   };
 
   const prefix = normalizePrefix(provider.prefix ?? provider['prefix']);
